@@ -1,0 +1,40 @@
+name: Bump casks on schedule or request
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 */23 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  autobump:
+    if: github.repository == 'Ssttar/homebrew-star'
+    runs-on: macos-latest
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+        with:
+          core: false
+          cask: true
+          test-bot: false
+
+      - name: Configure Git user
+        uses: Homebrew/actions/git-user-config@master
+        with:
+          username: ${{ (github.event_name == 'workflow_dispatch' && github.actor) || 'StarBrewTestBot' }}
+
+      - name: Get list of autobump casks
+        id: autobump
+        run: echo "autobump_list=$(xargs < "$(brew --repo Ssttar/star)"/.github/autobump.txt)" >> "$GITHUB_OUTPUT"
+
+      - name: Bump casks
+        uses: Homebrew/actions/bump-packages@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.HOMEBREW_STAR_REPO_WORKFLOW_TOKEN }}
+          casks: ${{ github.event.inputs.casks || steps.autobump.outputs.autobump_list }}
+        env:
+          STARHOMEBREW_TEST_BOT_AUTOBUMP: 1

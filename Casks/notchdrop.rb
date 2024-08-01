@@ -7,6 +7,11 @@ cask "notchdrop" do
   desc "Transform your MacBook's notch into a convenient file drop zone."
   homepage "https://github.com/Lakr233/NotchDrop"
 
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
   app "NotchDrop.app"
 
   zap trash: ""
