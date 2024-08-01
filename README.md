@@ -2,8 +2,6 @@
 
 ## 🍺 User Guide
 
----
-
 ### Tap
 
 ```shell
