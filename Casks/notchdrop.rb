@@ -14,5 +14,8 @@ cask "notchdrop" do
 
   app "NotchDrop.app"
 
-  zap trash: ""
+zap trash: [
+    "~/Library/Application Scripts/wiki.qaq.NotchDrop",
+    "~/Library/Containers/wiki.qaq.NotchDrop",
+  ]
 end
