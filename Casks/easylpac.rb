@@ -19,7 +19,7 @@ cask "easylpac" do
 
   preflight do
     system_command "xattr",
-                   args: ["-c", "EasyLPAC-macOS-#{arch}-with-lpac.dmg"]
+                   args: ["-c", "#{staged_path}/EasyLPAC-macOS-#{arch}-with-lpac.dmg"]
   end
 
   zap trash: ""
