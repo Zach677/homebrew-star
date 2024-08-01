@@ -22,5 +22,5 @@ cask "easylpac" do
                    args: ["-cr", "#{staged_path}/EasyLPAC.app"]
   end
 
-  zap trash: ""
+  # No zap stanza required
 end
