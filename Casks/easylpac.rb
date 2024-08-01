@@ -17,5 +17,10 @@ cask "easylpac" do
 
   app "EasyLPAC.app"
 
-  zap trash: ""
+  preflight do
+    system_command "xattr",
+                   args: ["-c", "EasyLPAC-macOS-#{arch}-with-lpac.dmg"]
   end
+
+  zap trash: ""
+end
