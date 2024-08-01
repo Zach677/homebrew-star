@@ -1,5 +1,11 @@
 # homebrew-star
 
+## 🏃 Get Started
+
+```shell
+/bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+
 ## 🍺 User Guide
 
 ### Tap
