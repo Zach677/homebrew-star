@@ -1,6 +1,6 @@
 cask "bbackupp" do
-  version "1.1.14"
-  sha256 "fb5c1c0cfc93e69ea8341916e1f6b81692f57f52b4e4770a347eaf6d99c11482"
+  version "2.12.66"
+  sha256 "903ccca8d240e43289536b20e6b5d45799608692c3192fd48e37f80e45039c33"
 
   url "https://github.com/Lakr233/BBackupp/releases/download/#{version}/BBackupp.app.zip"
   name "BBackupp"
