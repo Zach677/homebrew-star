@@ -17,10 +17,10 @@ cask "easylpac" do
 
   app "EasyLPAC.app"
 
-  preflight do
-    system_command "xattr",
-                   args: ["-d", "com.apple.FinderInfo", "#{staged_path}/EasyLPAC.app"]
-  end
+  # preflight do
+  #   system_command "xattr",
+  #                  args: ["-d", "com.apple.FinderInfo", "#{staged_path}/EasyLPAC.app"]
+  # end
 
   zap trash: ""
 end
