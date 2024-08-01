@@ -12,6 +12,8 @@ cask "notchdrop" do
     strategy :github_latest
   end
 
+  depends_on macos: ">= :ventura"
+
   app "NotchDrop.app"
 
 zap trash: [

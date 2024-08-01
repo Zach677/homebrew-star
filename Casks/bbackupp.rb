@@ -12,6 +12,8 @@ cask "bbackupp" do
     strategy :github_latest
   end
 
+  depends_on macos: ">= :ventura"
+
   app "BBackupp.app"
 
   zap trash: [
