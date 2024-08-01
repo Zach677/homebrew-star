@@ -19,7 +19,7 @@ cask "easylpac" do
 
   preflight do
     system_command "xattr",
-                   args: ["-c", "#{staged_path}/EasyLPAC-macOS-#{arch}-with-lpac.dmg"]
+                   args: ["-d", "com.apple.FinderInfo", "#{staged_path}/EasyLPAC.app"]
   end
 
   zap trash: ""
