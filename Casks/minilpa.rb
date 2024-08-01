@@ -17,5 +17,5 @@ cask "minilpa" do
 
   app "MiniLPA.app"
 
-  # No zap stanza required
+  zap trash: "~/.minilpa"
 end
