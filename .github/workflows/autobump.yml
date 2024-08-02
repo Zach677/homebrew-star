@@ -28,7 +28,7 @@ jobs:
 
       - name: Get list of autobump casks
         id: autobump
-        run: echo "autobump_list=$(xargs < "$(brew --repo Ssttar/star)"/.github/autobump.txt)" >> "$GITHUB_OUTPUT"
+        run: echo "autobump_list=$(xargs < "$(brew --repo Zach677/star)"/.github/autobump.txt)" >> "$GITHUB_OUTPUT"
 
       - name: Bump casks
         uses: Homebrew/actions/bump-packages@master
