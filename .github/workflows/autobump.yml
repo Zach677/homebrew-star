@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   autobump:
-    if: github.repository == 'Ssttar/homebrew-star'
+    if: github.repository == 'Zach677/homebrew-star'
     runs-on: macos-latest
     steps:
       - name: Set up Homebrew
@@ -24,7 +24,7 @@ jobs:
       - name: Configure Git user
         uses: Homebrew/actions/git-user-config@master
         with:
-          username: ${{ (github.event_name == 'workflow_dispatch' && github.actor) || 'StarBrewTestBot' }}
+          username: ${{ (github.event_name == 'workflow_dispatch' && github.actor) || 'ZachTestBot' }}
 
       - name: Get list of autobump casks
         id: autobump
@@ -37,4 +37,4 @@ jobs:
           token: ${{ secrets.HOMEBREW_STAR_REPO_WORKFLOW_TOKEN }}
           casks: ${{ github.event.inputs.casks || steps.autobump.outputs.autobump_list }}
         env:
-          STARHOMEBREW_TEST_BOT_AUTOBUMP: 1
+          Zach_TEST_BOT_AUTOBUMP: 1
