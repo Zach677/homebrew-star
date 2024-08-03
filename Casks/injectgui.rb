@@ -14,13 +14,11 @@ cask "injectgui" do
 
   app "InjectGUI.app"
 
-  # preflight do
-  #   system_command "xattr",
-  #                  args: ["-cr", "#{staged_path}/InjectGUI.app"]
-  # end
-
-# zap trash: [
-#     "~/Library/Application Scripts/wiki.qaq.NotchDrop",
-#     "~/Library/Containers/wiki.qaq.NotchDrop",
-#   ]
+  zap trash: [
+    "~/Library/Application Support/InjectGUI",
+    "~/Library/Caches/dev.wibus-wee.InjectGUI",
+    "~/Library/HTTPStorages/dev.wibus-wee.InjectGUI",
+    "~/Library/Preferences/dev.wibus-wee.InjectGUI.plist",
+    "~/Library/Saved Application State/dev.wibus-wee.InjectGUI.savedState",
+  ]
 end
