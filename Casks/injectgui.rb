@@ -1,6 +1,6 @@
 cask "injectgui" do
   version "1.0.0"
-  sha256 "7d4822b1c2765b4480dee50595fae5fd3be62863c3114e2bdc95a3537d82c8c8"
+  sha256 "53bab4fc0746ab4aebc80e1e7261774c6c8b58db10d81033d3fa0dd8b74f86aa"
 
   url "https://github.com/wibus-wee/InjectGUI/releases/download/v#{version}/InjectGUI.dmg"
   name "InjectGUI"
