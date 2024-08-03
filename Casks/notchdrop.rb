@@ -16,6 +16,11 @@ cask "notchdrop" do
 
   app "NotchDrop.app"
 
+  preflight do
+    system_command "xattr",
+                   args: ["-cr", "#{staged_path}/NotchDrop.app"]
+  end
+
 zap trash: [
     "~/Library/Application Scripts/wiki.qaq.NotchDrop",
     "~/Library/Containers/wiki.qaq.NotchDrop",
