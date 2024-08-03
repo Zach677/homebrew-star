@@ -2,3 +2,4 @@ notchdrop
 easylpac
 minilpa
 bbackupp
+injectgui
