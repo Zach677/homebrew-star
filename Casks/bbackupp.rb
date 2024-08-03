@@ -1,8 +1,8 @@
 cask "bbackupp" do
-  version "2.4.16"
-  sha256 "d532fa58a34dcdc0d3a344384e26ffbba4479dde407e7430857ef12bb1cf5642"
+  version "2.12.66"
+  sha256 "903ccca8d240e43289536b20e6b5d45799608692c3192fd48e37f80e45039c33"
 
-  url "https://github.com/Zach677/NotchDrop/releases/download/#{version}/NotchDrop.dmg"
+  url "https://github.com/Lakr233/BBackupp/releases/download/#{version}/BBackupp.app.zip"
   name "BBackupp"
   desc "Automated iOS Backup Robot"
   homepage "https://github.com/Lakr233/BBackupp"

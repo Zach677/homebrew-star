@@ -1,8 +1,8 @@
 cask "notchdrop" do
-  version "2.4.13"
-  sha256 "6dc549402d1e2f8462132ac088ae86ab7a1032a18b144998f47022828e3ac85d"
+  version "2.4.16"
+  sha256 "d532fa58a34dcdc0d3a344384e26ffbba4479dde407e7430857ef12bb1cf5642"
 
-  url "https://github.com/Lakr233/NotchDrop/releases/download/#{version}/NotchDrop.zip"
+  url "https://github.com/Zach677/NotchDrop/releases/download/#{version}/NotchDrop.dmg"
   name "NotchDrop"
   desc "Transform your MacBook's notch into a convenient file drop zone."
   homepage "https://github.com/Lakr233/NotchDrop"
