@@ -4,7 +4,7 @@ cask "injectgui" do
 
   url "https://github.com/wibus-wee/InjectGUI/releases/download/v#{version}/InjectGUI.dmg"
   name "InjectGUI"
-  desc "macOS Integrated Injection Framework (GUI version)"
+  desc "Integrated Injection Framework (GUI version)"
   homepage "https://github.com/wibus-wee/InjectGUI"
 
   livecheck do
