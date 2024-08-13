@@ -4,7 +4,7 @@ cask "notchdrop" do
 
   url "https://github.com/Zach677/NotchDrop/releases/download/#{version}/NotchDrop.dmg"
   name "NotchDrop"
-  desc "Transform your MacBook's notch into a convenient file drop zone."
+  desc "Transform your MacBook's notch into a convenient file drop zone"
   homepage "https://github.com/Lakr233/NotchDrop"
 
   livecheck do
@@ -21,7 +21,7 @@ cask "notchdrop" do
                    args: ["-cr", "#{staged_path}/NotchDrop.app"]
   end
 
-zap trash: [
+  zap trash: [
     "~/Library/Application Scripts/wiki.qaq.NotchDrop",
     "~/Library/Containers/wiki.qaq.NotchDrop",
   ]
