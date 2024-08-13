@@ -79,7 +79,7 @@ jobs:
         if: ${{ failure() && steps.archived.conclusion == 'failure' }}
         run: |
           gh issue comment "$REPORTING_ISSUE" \
-                           --repo homebrew/homebrew-cask \
+                           --repo Zach677/homebrew-star \
                            --body "${{ matrix.cask }} should be archived. Check ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Check cask for unavailable homepage.
@@ -90,7 +90,7 @@ jobs:
         if: ${{ failure() && steps.homepage.conclusion == 'failure' }}
         run: |
           gh issue comment "$REPORTING_ISSUE" \
-                           --repo homebrew/homebrew-cask \
+                           --repo Zach677/homebrew-star \
                            --body "${{ matrix.cask }} has homepage issues. Check ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Check cask for missing sources.
@@ -101,5 +101,5 @@ jobs:
         if: ${{ failure() && steps.fetch.conclusion == 'failure' }}
         run: |
           gh issue comment "$REPORTING_ISSUE" \
-                           --repo homebrew/homebrew-cask \
+                           --repo Zach677/homebrew-star \
                            --body "${{ matrix.cask }} source has problems. Check ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
