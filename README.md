@@ -1,4 +1,4 @@
-# homebrew-star
+# Homebrew-star
 
 ## 🏃 Get Started
 
