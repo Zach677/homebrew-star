@@ -4,7 +4,7 @@ cask "adobedownloader" do
 
   url "https://github.com/X1a0He/Adobe-Downloader/releases/download/#{version}/Adobe.Downloader.dmg"
   name "Adobe-Downloader"
-  desc "macOS Adobe apps download & installer"
+  desc "Adobe apps download & installer"
   homepage "https://github.com/X1a0He/Adobe-Downloader"
 
   livecheck do
