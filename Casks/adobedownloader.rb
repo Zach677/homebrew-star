@@ -21,8 +21,5 @@ cask "adobedownloader" do
                    args: ["-cr", "#{staged_path}/Adobe Downloader.app"]
   end
 
-  # zap trash: [
-  #   "~/Library/Application Scripts/wiki.qaq.NotchDrop",
-  #   "~/Library/Containers/wiki.qaq.NotchDrop",
-  # ]
+  # No zap stanza required
 end

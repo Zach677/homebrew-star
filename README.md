@@ -11,7 +11,7 @@
 ### Tap
 
 ```shell
-brew tap Ssttar/star
+brew tap Zach677/star
 ```
 
 ### Install
