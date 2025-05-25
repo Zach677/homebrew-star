@@ -16,5 +16,9 @@ cask "sentry" do
 
   app "Sentry.app"
 
-  # zap trash: []
+  zap trash: [
+    "~/Library/Application Support/io.sentry",
+    "~/Library/Caches/io.sentry",
+    "~/Library/Containers/wiki.qaq.Sentry",
+  ]
 end
