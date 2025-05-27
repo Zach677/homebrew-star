@@ -16,6 +16,11 @@ cask "sentry" do
 
   app "Sentry.app"
 
+  preflight do
+    system_command "xattr",
+                   args: ["-cr", "#{staged_path}/Sentry.app"]
+  end
+
   zap trash: [
     "~/Library/Application Support/io.sentry",
     "~/Library/Caches/io.sentry",
