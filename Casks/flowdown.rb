@@ -21,8 +21,8 @@ cask "flowdown" do
                    args: ["-cr", "#{staged_path}/FlowDown.app"]
   end
 
-  # zap trash: [
-  #   "~/Library/Application Scripts/wiki.qaq.FlowDown",
-  #   "~/Library/Containers/wiki.qaq.FlowDown",
-  # ]
+  zap trash: [
+    "~/Library/Containers/wiki.qaq.flow.FlowDownWidget",
+    "~/Library/Containers/wiki.qaq.FlowDown.Community",
+  ]
 end
