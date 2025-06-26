@@ -4,7 +4,7 @@ cask "flowdown" do
 
   url "https://github.com/Lakr233/FlowDown/releases/download/#{version}/FlowDown-v#{version}.zip"
   name "FlowDown"
-  desc "FlowDown is a fast, user-friendly AI agent app for macOS."
+  desc "AI agent"
   homepage "https://flowdown.ai/"
 
   livecheck do
@@ -16,10 +16,10 @@ cask "flowdown" do
 
   app "FlowDown.app"
 
-  preflight do
-    system_command "xattr",
-                   args: ["-cr", "#{staged_path}/FlowDown.app"]
-  end
+  # preflight do
+  #   system_command "xattr",
+  #                  args: ["-cr", "#{staged_path}/FlowDown.app"]
+  # end
 
   zap trash: [
     "~/Library/Containers/wiki.qaq.flow.FlowDownWidget",
