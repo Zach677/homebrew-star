@@ -16,8 +16,8 @@ cask "whatcopied" do
 
   app "WhatCopied.app"
 
-  # zap trash: [
-  #   "~/Library/Application Scripts/wiki.qaq.NotchDrop",
-  #   "~/Library/Containers/wiki.qaq.NotchDrop",
-  # ]
+  zap trash: [
+    "~/Library/Application Scripts/app.cyan.whatcopied",
+    "~/Library/Containers/app.cyan.whatcopied",
+  ]
 end
