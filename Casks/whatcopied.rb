@@ -12,7 +12,7 @@ cask "whatcopied" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :Sonoma"
+  depends_on macos: ">= :sonoma"
 
   app "WhatCopied.app"
 
