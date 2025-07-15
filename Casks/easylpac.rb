@@ -1,9 +1,9 @@
 cask "easylpac" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "0.7.8.3"
-  sha256 arm:   "c107ec1873332894d44b1c36baa26e6771731f287cd23fd2255f926c172c71c9",
-         intel: "49ad327feb56ab037b468d7c784cfac4207a1cdfffdf260d09855230b10bfce9"
+  version "0.7.8.4"
+  sha256 arm:   "292b9474b917c559d48365f31ef1bc5e45e3c53a7af799dae92dffddfe9e5090",
+         intel: "9e19f71add70a33fc58259089ae9f6b8cf027c6a67e38cc405232fc4bf72c282"
 
   url "https://github.com/creamlike1024/EasyLPAC/releases/download/#{version}/EasyLPAC-macOS-#{arch}-with-lpac.dmg"
   name "EasyLPAC"
