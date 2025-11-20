@@ -1,6 +1,6 @@
 cask "notchdrop" do
-  version "2.17.50"
-  sha256 "ece485ef3c80ccc5353d6f4f16d61faba6fdd77b4aa260a9614856cbb6ce0223"
+  version "2.18.40"
+  sha256 "fd4f11dcb4b7b38f946f92773abec32cd1e34fe5301c57b05f674a6d677035d6"
 
   url "https://github.com/Zach677/NotchDrop/releases/download/#{version}/NotchDrop.dmg"
   name "NotchDrop"
