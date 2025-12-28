@@ -1,6 +1,6 @@
 cask "antigravity-tools" do
-  version "3.3.0"
-  sha256 "61f7951375d2e93e0eb5bf74509be79d9a55fe42b422408e5e4cd6af2ced7ddf"
+  version "3.3.1"
+  sha256 "035aa4a7b3e2e53c18181df032def6d56e59b61477b063b1435c1fb417271652"
 
   url "https://github.com/lbjlaq/Antigravity-Manager/releases/download/v#{version}/Antigravity.Tools_#{version}_universal.dmg"
   name "Antigravity Tools"
@@ -11,7 +11,7 @@ cask "antigravity-tools" do
 
   preflight do
     system_command "xattr",
-                   args: ["-cr", "#{staged_path}/Antigravity\ Tools.app"]
+                   args: ["-cr", "#{staged_path}/Antigravity Tools.app"]
   end
 
   zap trash: [
