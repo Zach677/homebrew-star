@@ -1,6 +1,6 @@
 cask "antigravity-tools" do
-  version "3.2.1"
-  sha256 :no_check
+  version "3.3.0"
+  sha256 "61f7951375d2e93e0eb5bf74509be79d9a55fe42b422408e5e4cd6af2ced7ddf"
 
   url "https://github.com/lbjlaq/Antigravity-Manager/releases/download/v#{version}/Antigravity.Tools_#{version}_universal.dmg"
   name "Antigravity Tools"
@@ -9,18 +9,15 @@ cask "antigravity-tools" do
 
   app "Antigravity Tools.app"
 
+  preflight do
+    system_command "xattr",
+                   args: ["-cr", "#{staged_path}/Antigravity\ Tools.app"]
+  end
+
   zap trash: [
     "~/Library/Application Support/com.lbjlaq.antigravity-tools",
     "~/Library/Caches/com.lbjlaq.antigravity-tools",
     "~/Library/Preferences/com.lbjlaq.antigravity-tools.plist",
     "~/Library/Saved Application State/com.lbjlaq.antigravity-tools.savedState",
   ]
-
-  caveats <<~EOS
-    If you encounter the "App is damaged" error, please run the following command:
-      sudo xattr -rd com.apple.quarantine "/Applications/Antigravity Tools.app"
-
-    Or install with the --no-quarantine flag:
-      brew install --cask --no-quarantine antigravity-tools
-  EOS
 end
