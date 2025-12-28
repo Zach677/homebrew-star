@@ -1,5 +1,5 @@
 cask "antigravity-tools" do
-  version "3.2.1"
+  version "3.3.0"
   sha256 :no_check
 
   url "https://github.com/lbjlaq/Antigravity-Manager/releases/download/v#{version}/Antigravity.Tools_#{version}_universal.dmg"
