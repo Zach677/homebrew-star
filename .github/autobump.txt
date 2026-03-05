@@ -3,3 +3,4 @@ easylpac
 minilpa
 flowdown
 antigravity-tools
+alma

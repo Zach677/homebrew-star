@@ -14,16 +14,33 @@
 brew tap Zach677/star
 ```
 
-### Install
+### Install Cask
 
 ```shell
-brew install <cask/formula>
+brew install --cask <cask-name>
 ```
 
-### Uninstall
+Example:
+```shell
+brew install --cask alma
+```
+
+### Install Formula
 
 ```shell
-brew uninstall <cask/formula>
+brew install <formula-name>
+```
+
+### Uninstall Cask
+
+```shell
+brew uninstall --cask <cask-name>
+```
+
+### Uninstall Formula
+
+```shell
+brew uninstall <formula-name>
 ```
 
 ## 🥰 Acknowledgements
