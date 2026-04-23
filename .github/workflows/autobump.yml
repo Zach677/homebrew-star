@@ -15,14 +15,13 @@ jobs:
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+        uses: Homebrew/actions/setup-homebrew@main
         with:
           core: false
           cask: true
-          test-bot: false
 
       - name: Configure Git user
-        uses: Homebrew/actions/git-user-config@master
+        uses: Homebrew/actions/git-user-config@main
         with:
           username: ${{ (github.event_name == 'workflow_dispatch' && github.actor) || 'ZachTestBot' }}
 
@@ -31,7 +30,7 @@ jobs:
         run: echo "autobump_list=$(xargs < "$(brew --repo Zach677/star)"/.github/autobump.txt)" >> "$GITHUB_OUTPUT"
 
       - name: Bump casks
-        uses: Homebrew/actions/bump-packages@master
+        uses: Homebrew/actions/bump-packages@main
         continue-on-error: true
         with:
           token: ${{ secrets.HOMEBREW_STAR_REPO_WORKFLOW_TOKEN }}

@@ -1,14 +1,14 @@
 cask "lookinside" do
-  version "2.0.2"
-  sha256 "e99ab38216b1891dc27fedd5a05bab5ef6faa30b7eebdbe60750ae85ceee4cb6"
+  version "2.2.7"
+  sha256 "04d6091beafea5b9a9f86abfe30b1ad76741e7ba6c3292c3e17ae7aa0f85e9ea"
 
-  url "https://github.com/Lakr233/LookInside/releases/download/#{version}/LookInside-#{version}-macOS.zip"
+  url "https://github.com/LookInsideApp/LookInside/releases/download/#{version}/LookInside-#{version}-macOS-app.zip"
   name "LookInside"
   desc "UI inspector for debuggable Apple apps"
-  homepage "https://github.com/Lakr233/LookInside"
+  homepage "https://github.com/LookInsideApp/LookInside"
 
   livecheck do
-    url :url
+    url :homepage
     strategy :github_latest
   end
 
