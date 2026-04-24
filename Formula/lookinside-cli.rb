@@ -1,21 +1,20 @@
 class LookinsideCli < Formula
   desc "Command-line inspector for debuggable Apple apps"
-  homepage "https://github.com/Lakr233/LookInside"
-  url "https://github.com/Lakr233/LookInside/archive/refs/tags/2.0.2.tar.gz"
-  sha256 "ef153f81ad143b4e609599581b415091ad169bd34fa77884972e8af7d70bfa5f"
+  homepage "https://github.com/LookInsideApp/LookInside"
+  url "https://github.com/LookInsideApp/LookInside/releases/download/2.2.7/LookInside-2.2.7-macOS-cli.zip"
+  sha256 "7d6963ea4984627d48c3aaa52628123b24099502497aabf6c1f4065099bd69b4"
   license "GPL-3.0-only"
 
   livecheck do
-    url :stable
+    url :homepage
     strategy :github_latest
   end
 
-  depends_on macos: :big_sur
-  uses_from_macos "swift" => :build
+  depends_on arch: :arm64
+  depends_on macos: :sonoma
 
   def install
-    system "swift", "build", "--disable-sandbox", "--configuration", "release", "--product", "lookinside"
-    bin.install ".build/release/lookinside"
+    bin.install "lookinside"
   end
 
   test do

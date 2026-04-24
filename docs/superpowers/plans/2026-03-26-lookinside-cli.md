@@ -2,11 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add a standalone Homebrew formula that installs the upstream `lookinside` CLI and upgrades cleanly from tagged source releases.
+**Goal:** Add a standalone Homebrew formula that installs the upstream `lookinside` CLI and upgrades cleanly from tagged releases.
 
-**Architecture:** Create one focused formula file in `Formula/lookinside-cli.rb`. Build the `lookinside` executable from the upstream source tarball with SwiftPM, install only the CLI binary, and validate it with Homebrew style/audit plus a source install smoke test.
+**Architecture:** Create one focused formula file in `Formula/lookinside-cli.rb`. Install the official upstream CLI release artifact, keep it separate from the GUI app cask, and validate it with Homebrew style/audit plus an install smoke test.
 
-**Tech Stack:** Homebrew Ruby DSL, SwiftPM, GitHub release tags, macOS system Swift/Xcode toolchain
+**Tech Stack:** Homebrew Ruby DSL, GitHub release assets, macOS CLI binary distribution
 
 ---
 
@@ -30,23 +30,23 @@ Create a formula with:
 ```ruby
 class LookinsideCli < Formula
   desc "Command-line inspector for debuggable Apple apps"
-  homepage "https://github.com/Lakr233/LookInside"
-  url "https://github.com/Lakr233/LookInside/archive/refs/tags/2.0.2.tar.gz"
-  sha256 "ef153f81ad143b4e609599581b415091ad169bd34fa77884972e8af7d70bfa5f"
+  homepage "https://github.com/LookInsideApp/LookInside"
+  url "https://github.com/LookInsideApp/LookInside/releases/download/2.2.7/LookInside-2.2.7-macOS-cli.zip"
+  sha256 "7d6963ea4984627d48c3aaa52628123b24099502497aabf6c1f4065099bd69b4"
   license "GPL-3.0-only"
 end
 ```
 
 - [ ] **Step 2: Add the build/install logic**
 
-Use the minimal Swift formula pattern:
+Install the upstream CLI artifact directly:
 
 ```ruby
-uses_from_macos "swift" => :build
+depends_on arch: :arm64
+depends_on macos: :sonoma
 
 def install
-  system "swift", "build", "--disable-sandbox", "--configuration", "release", "--product", "lookinside"
-  bin.install ".build/release/lookinside"
+  bin.install "lookinside"
 end
 ```
 
@@ -87,15 +87,15 @@ Expected: exits successfully with no formula offenses
 - Modify: `/Users/star/Developer/zach-repo/homebrew-star/Formula/lookinside-cli.rb`
 - Test: installed binary behavior
 
-- [ ] **Step 1: Build the formula from source**
+- [ ] **Step 1: Install the formula**
 
 Run:
 
 ```bash
-HOMEBREW_NO_INSTALL_FROM_API=1 brew install --build-from-source Zach677/star/lookinside-cli
+HOMEBREW_NO_INSTALL_FROM_API=1 brew install Zach677/star/lookinside-cli
 ```
 
-Expected: Homebrew builds the executable and links `lookinside`
+Expected: Homebrew downloads the upstream CLI artifact and links `lookinside`
 
 - [ ] **Step 2: Verify runtime**
 

@@ -7,18 +7,19 @@ Add a separate Homebrew formula for the upstream `lookinside` command-line tool 
 ## Constraints
 
 - Keep the existing `/Users/star/Developer/zach-repo/homebrew-star/Casks/lookinside.rb` unchanged as the GUI app entry.
-- Avoid manual local compilation on every update; Homebrew should rebuild from source during `brew upgrade lookinside-cli`.
-- Follow Homebrew core-style Swift formula patterns instead of inventing a weird custom install path.
+- Avoid manual local compilation on every update; upstream now publishes a standalone CLI artifact for each release.
+- Do not use the top-level Swift package as the build source. The new repository's `Package.swift` is intentionally empty for the app project and no longer exposes the `lookinside` executable product.
+- Keep the formula separate from the app cask so `brew install lookinside-cli` installs only the command-line tool.
 
 ## Chosen Approach
 
-Use a dedicated formula at `Formula/lookinside-cli.rb` that downloads the upstream GitHub source tarball for a tagged release and builds only the `lookinside` executable with SwiftPM:
+Use a dedicated formula at `Formula/lookinside-cli.rb` that downloads the official CLI zip from the upstream GitHub release and installs the contained `lookinside` executable:
 
-- source URL: `https://github.com/Lakr233/LookInside/archive/refs/tags/<version>.tar.gz`
-- build command: `swift build --disable-sandbox --configuration release --product lookinside`
-- install target: `.build/release/lookinside`
+- release URL: `https://github.com/LookInsideApp/LookInside/releases/download/<version>/LookInside-<version>-macOS-cli.zip`
+- install target: `lookinside`
+- livecheck source: GitHub latest release on `https://github.com/LookInsideApp/LookInside`
 
-This matches common Homebrew core patterns for Swift CLIs and cleanly separates the CLI from the app cask.
+This follows the current upstream packaging layout and cleanly separates the CLI from the app cask.
 
 ## Alternatives Considered
 
@@ -26,19 +27,19 @@ This matches common Homebrew core patterns for Swift CLIs and cleanly separates 
 
 Rejected. It couples CLI lifecycle to the GUI app artifact, makes upgrades less explicit, and does not match Homebrew core’s normal division between formulae and casks.
 
-### 2. Ship a prebuilt CLI artifact
+### 2. Build from the source tarball with SwiftPM
 
-Rejected. Upstream does not publish a standalone CLI binary today, so the tap would need its own build/distribution pipeline.
+Rejected for the current upstream layout. `LookInsideApp/LookInside` no longer exposes a SwiftPM executable product for `lookinside` from the top-level package.
 
 ## Behavior
 
 - `brew install lookinside-cli` installs the `lookinside` binary.
-- `brew upgrade lookinside-cli` fetches the newer source tag and rebuilds it.
+- `brew upgrade lookinside-cli` fetches the newer upstream CLI artifact.
 - The formula should be safe to audit/style-check with standard Homebrew tooling.
 
 ## Validation
 
-- `brew style --formula Formula/lookinside-cli.rb`
+- `brew style --formula Zach677/star/lookinside-cli`
 - `brew audit --formula Zach677/star/lookinside-cli`
-- `brew install --build-from-source Zach677/star/lookinside-cli`
+- `brew install Zach677/star/lookinside-cli`
 - `lookinside --help`
