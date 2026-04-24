@@ -1,7 +1,16 @@
-name: Bump casks on schedule or request
+name: Bump packages on schedule or request
 
 on:
   workflow_dispatch:
+    inputs:
+      casks:
+        description: Space-separated cask tokens to bump
+        required: false
+        type: string
+      formulae:
+        description: Space-separated formula tokens to bump
+        required: false
+        type: string
   schedule:
     - cron: '20 */23 * * *'
 
@@ -25,15 +34,19 @@ jobs:
         with:
           username: ${{ (github.event_name == 'workflow_dispatch' && github.actor) || 'ZachTestBot' }}
 
-      - name: Get list of autobump casks
+      - name: Get list of autobump packages
         id: autobump
-        run: echo "autobump_list=$(xargs < "$(brew --repo Zach677/star)"/.github/autobump.txt)" >> "$GITHUB_OUTPUT"
+        run: |
+          tap_repo="$(brew --repo Zach677/star)"
+          echo "cask_list=$(xargs < "${tap_repo}/.github/autobump.txt")" >> "$GITHUB_OUTPUT"
+          echo "formula_list=$(xargs < "${tap_repo}/.github/autobump-formulae.txt")" >> "$GITHUB_OUTPUT"
 
-      - name: Bump casks
+      - name: Bump packages
         uses: Homebrew/actions/bump-packages@main
         continue-on-error: true
         with:
           token: ${{ secrets.HOMEBREW_STAR_REPO_WORKFLOW_TOKEN }}
-          casks: ${{ github.event.inputs.casks || steps.autobump.outputs.autobump_list }}
+          casks: ${{ inputs.casks || steps.autobump.outputs.cask_list }}
+          formulae: ${{ inputs.formulae || steps.autobump.outputs.formula_list }}
         env:
           Zach_TEST_BOT_AUTOBUMP: 1

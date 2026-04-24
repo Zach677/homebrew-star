@@ -7,6 +7,11 @@ cask "antigravity-tools" do
   desc "Professional Account Management for AI Services"
   homepage "https://github.com/lbjlaq/Antigravity-Manager"
 
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
   app "Antigravity Tools.app"
 
   preflight do

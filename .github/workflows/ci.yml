@@ -1,0 +1,106 @@
+name: Tap CI
+
+on:
+  pull_request:
+    paths:
+      - Casks/**
+      - Formula/**
+      - .github/workflows/ci.yml
+  push:
+    branches:
+      - main
+    paths:
+      - Casks/**
+      - Formula/**
+      - .github/workflows/ci.yml
+  workflow_dispatch:
+
+concurrency:
+  group: tap-ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.repository == 'Zach677/homebrew-star'
+    runs-on: macos-latest
+    env:
+      HOMEBREW_GITHUB_API_TOKEN: ${{ github.token }}
+      HOMEBREW_NO_INSTALL_FROM_API: 1
+      TAP: Zach677/star
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@main
+        with:
+          core: false
+          cask: true
+
+      - name: Validate tap packages
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tap_repo="$(brew --repo "${TAP}")"
+          casks="$(find "${tap_repo}/Casks" -maxdepth 1 -type f -name "*.rb" | sed -E "s#^.*/([^/]+)\.rb#${TAP}/\1#" | sort | xargs)"
+          formulae="$(find "${tap_repo}/Formula" -maxdepth 1 -type f -name "*.rb" | sed -E "s#^.*/([^/]+)\.rb#${TAP}/\1#" | sort | xargs)"
+
+          if [[ -n "${casks}" ]]; then
+            # shellcheck disable=SC2086
+            brew style --cask ${casks}
+            # shellcheck disable=SC2086
+            brew audit --cask --skip-style ${casks}
+          fi
+
+          if [[ -n "${formulae}" ]]; then
+            # shellcheck disable=SC2086
+            brew style --formula ${formulae}
+            # shellcheck disable=SC2086
+            brew audit --formula --skip-style ${formulae}
+          fi
+
+      - name: Smoke-test changed packages
+        shell: bash
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+
+          tap_repo="$(brew --repo "${TAP}")"
+          event_name="${GITHUB_EVENT_NAME}"
+          changed_files=""
+
+          if [[ "${event_name}" == "pull_request" ]]; then
+            git -C "${tap_repo}" fetch --no-tags --depth=100 origin "${GITHUB_BASE_REF}"
+            changed_files="$(git -C "${tap_repo}" diff --name-only "origin/${GITHUB_BASE_REF}" HEAD -- Casks Formula)"
+          elif [[ "${event_name}" == "push" && -n "${BEFORE_SHA}" && ! "${BEFORE_SHA}" =~ ^0+$ ]]; then
+            git -C "${tap_repo}" fetch --no-tags --depth=100 origin "${BEFORE_SHA}" || true
+            changed_files="$(git -C "${tap_repo}" diff --name-only "${BEFORE_SHA}" HEAD -- Casks Formula || true)"
+          elif git -C "${tap_repo}" rev-parse --verify HEAD^ >/dev/null 2>&1; then
+            changed_files="$(git -C "${tap_repo}" diff --name-only HEAD^ HEAD -- Casks Formula || true)"
+          fi
+
+          changed_casks="$(printf "%s\n" "${changed_files}" | sed -nE "s#^Casks/([^/]+)\.rb#${TAP}/\1#p" | sort -u | xargs)"
+          changed_formulae="$(printf "%s\n" "${changed_files}" | sed -nE "s#^Formula/([^/]+)\.rb#${TAP}/\1#p" | sort -u | xargs)"
+
+          {
+            echo "### Changed package smoke tests"
+            echo
+            echo "Casks: ${changed_casks:-none}"
+            echo "Formulae: ${changed_formulae:-none}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if [[ -n "${changed_casks}" ]]; then
+            # shellcheck disable=SC2086
+            brew fetch --cask ${changed_casks}
+          fi
+
+          if [[ -n "${changed_formulae}" ]]; then
+            for formula in ${changed_formulae}; do
+              brew uninstall --force "${formula}" || true
+              brew install --build-from-source "${formula}"
+              brew test "${formula}"
+            done
+          fi

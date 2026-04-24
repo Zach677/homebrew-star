@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  issues: write
+  contents: read
 
 jobs:
   create_matrix:
@@ -39,7 +39,12 @@ jobs:
       - name: Generate matrix
         id: matrix
         run: |
-          casks="$(find "$(brew --repo "${TAP}")/Casks" -type f | shuf -n "${TEST_COUNT}" | xargs -I{} basename {} .rb)"
+          casks="$(
+            find "$(brew --repo "${TAP}")/Casks" -type f -name "*.rb" |
+            shuf -n "${TEST_COUNT}" |
+            sed -E "s#^.*/([^/]+)\.rb#${TAP}/\1#" |
+            xargs
+          )"
           # shellcheck disable=SC2086
           json="$(
             brew info --json=v2 --casks $casks |
@@ -54,8 +59,6 @@ jobs:
     name: 'Online check (${{ matrix.os }}): ${{ matrix.cask }}'
     env:
       HOMEBREW_GITHUB_API_TOKEN: '${{ github.token }}'
-      GH_TOKEN: '${{ github.token }}'
-      REPORTING_ISSUE: 172732
     strategy:
       fail-fast: false
       matrix:
@@ -76,9 +79,13 @@ jobs:
       - name: Report online issues
         if: ${{ failure() && steps.archived.conclusion == 'failure' }}
         run: |
-          gh issue comment "$REPORTING_ISSUE" \
-                           --repo Zach677/homebrew-star \
-                           --body "${{ matrix.cask }} should be archived. Check ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          {
+            echo "### Archived source"
+            echo
+            echo "${{ matrix.cask }} should be archived."
+            echo
+            echo "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Check cask for unavailable homepage.
         id: homepage
@@ -87,9 +94,13 @@ jobs:
       - name: Report homepage issues
         if: ${{ failure() && steps.homepage.conclusion == 'failure' }}
         run: |
-          gh issue comment "$REPORTING_ISSUE" \
-                           --repo Zach677/homebrew-star \
-                           --body "${{ matrix.cask }} has homepage issues. Check ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          {
+            echo "### Homepage issue"
+            echo
+            echo "${{ matrix.cask }} has homepage issues."
+            echo
+            echo "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Check cask for missing sources.
         id: fetch
@@ -98,6 +109,10 @@ jobs:
       - name: Report fetch issues
         if: ${{ failure() && steps.fetch.conclusion == 'failure' }}
         run: |
-          gh issue comment "$REPORTING_ISSUE" \
-                           --repo Zach677/homebrew-star \
-                           --body "${{ matrix.cask }} source has problems. Check ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          {
+            echo "### Fetch issue"
+            echo
+            echo "${{ matrix.cask }} source has problems."
+            echo
+            echo "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } >> "$GITHUB_STEP_SUMMARY"

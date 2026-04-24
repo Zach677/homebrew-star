@@ -4,7 +4,7 @@ cask "type4me" do
 
   url "https://github.com/joewongjc/type4me/releases/download/v#{version}/Type4Me-#{version}.dmg"
   name "Type4Me"
-  desc "Speech input app for macOS"
+  desc "Speech input utility"
   homepage "https://github.com/joewongjc/type4me"
 
   livecheck do

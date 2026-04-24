@@ -4,3 +4,10 @@ minilpa
 flowdown
 antigravity-tools
 alma
+claude-island
+codexbar
+lookinside
+pastemd
+sentry
+type4me
+whatcopied

@@ -4,7 +4,7 @@ cask "whatcopied" do
 
   url "https://github.com/WhatCopied-app/WhatCopied/releases/download/v#{version}/WhatCopied-#{version}.dmg"
   name "WhatCopied"
-  desc "The ultimate pasteboard debugger for macOS developers."
+  desc "Pasteboard debugger for developers"
   homepage "https://github.com/WhatCopied-app/WhatCopied"
 
   livecheck do

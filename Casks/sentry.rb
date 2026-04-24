@@ -4,7 +4,7 @@ cask "sentry" do
 
   url "https://github.com/Zach677/Sentry/releases/download/#{version}/Sentry.dmg"
   name "Sentry"
-  desc "A powerful security monitoring application that detects unauthorized access attempts and records video evidence for you."
+  desc "Security monitor for unauthorized access attempts"
   homepage "https://github.com/Lakr233/Sentry"
 
   livecheck do
