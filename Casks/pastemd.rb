@@ -13,6 +13,7 @@ cask "pastemd" do
   end
 
   depends_on arch: :arm64
+  depends_on :macos
 
   app "PasteMD.app"
 

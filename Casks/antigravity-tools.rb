@@ -12,6 +12,8 @@ cask "antigravity-tools" do
     strategy :github_latest
   end
 
+  depends_on :macos
+
   app "Antigravity Tools.app"
 
   preflight do

@@ -15,6 +15,8 @@ cask "easylpac" do
     strategy :github_latest
   end
 
+  depends_on :macos
+
   app "EasyLPAC.app"
 
   preflight do

@@ -15,6 +15,8 @@ cask "minilpa" do
     strategy :github_latest
   end
 
+  depends_on :macos
+
   app "MiniLPA.app"
 
   zap trash: "~/.minilpa"

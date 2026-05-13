@@ -12,6 +12,8 @@ cask "claude-island" do
     strategy :github_latest
   end
 
+  depends_on :macos
+
   app "Claude Island.app"
 
   preflight do

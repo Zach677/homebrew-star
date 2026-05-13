@@ -15,6 +15,8 @@ cask "ocs-desktop" do
     skip "GitHub latest releases do not consistently include macOS artifacts"
   end
 
+  depends_on :macos
+
   app "OCS Desktop.app"
 
   preflight do

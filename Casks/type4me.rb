@@ -12,7 +12,7 @@ cask "type4me" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
 
   app "Type4Me.app"
 
