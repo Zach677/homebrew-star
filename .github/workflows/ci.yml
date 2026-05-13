@@ -84,12 +84,21 @@ jobs:
 
           changed_casks="$(printf "%s\n" "${changed_files}" | sed -nE "s#^Casks/([^/]+)\.rb#${TAP}/\1#p" | sort -u | xargs)"
           changed_formulae="$(printf "%s\n" "${changed_files}" | sed -nE "s#^Formula/([^/]+)\.rb#${TAP}/\1#p" | sort -u | xargs)"
+          testable_formulae=""
+          skipped_formulae=""
+          if [[ -n "${changed_formulae}" ]]; then
+            # shellcheck disable=SC2086
+            formula_info="$(brew info --json=v2 --formula ${changed_formulae})"
+            testable_formulae="$(printf "%s" "${formula_info}" | jq --raw-output '.formulae[] | select(.disabled == false) | .full_name' | xargs)"
+            skipped_formulae="$(printf "%s" "${formula_info}" | jq --raw-output '.formulae[] | select(.disabled == true) | .full_name' | xargs)"
+          fi
 
           {
             echo "### Changed package smoke tests"
             echo
             echo "Casks: ${changed_casks:-none}"
-            echo "Formulae: ${changed_formulae:-none}"
+            echo "Formulae: ${testable_formulae:-none}"
+            echo "Skipped disabled formulae: ${skipped_formulae:-none}"
           } >> "$GITHUB_STEP_SUMMARY"
 
           if [[ -n "${changed_casks}" ]]; then
@@ -97,8 +106,8 @@ jobs:
             brew fetch --cask ${changed_casks}
           fi
 
-          if [[ -n "${changed_formulae}" ]]; then
-            for formula in ${changed_formulae}; do
+          if [[ -n "${testable_formulae}" ]]; then
+            for formula in ${testable_formulae}; do
               brew uninstall --force "${formula}" || true
               brew install --build-from-source "${formula}"
               brew test "${formula}"

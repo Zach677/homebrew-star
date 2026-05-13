@@ -6,9 +6,10 @@ class LookinsideCli < Formula
   license "GPL-3.0-only"
 
   livecheck do
-    url :homepage
-    strategy :github_latest
+    skip "No CLI release asset is published"
   end
+
+  disable! date: "2026-05-13", because: "CLI release assets are no longer published"
 
   depends_on arch: :arm64
   depends_on macos: :sonoma
