@@ -1,6 +1,6 @@
 cask "whatcopied" do
-  version "1.1.0"
-  sha256 "da559325e0e2117330a712136ece6e6c2ae655c4863499612be76e645bf6844f"
+  version "1.4.0"
+  sha256 "b831ba54d59bf15fbe698c1a92e226f479677ef3a16894b508761c5358f4465f"
 
   url "https://github.com/WhatCopied-app/WhatCopied/releases/download/v#{version}/WhatCopied-#{version}.dmg"
   name "WhatCopied"
@@ -12,7 +12,7 @@ cask "whatcopied" do
     strategy :github_latest
   end
 
-  depends_on macos: :sonoma
+  depends_on macos: :sequoia
 
   app "WhatCopied.app"
 
