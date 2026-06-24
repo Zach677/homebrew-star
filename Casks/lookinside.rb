@@ -1,6 +1,6 @@
 cask "lookinside" do
-  version "2.3.8"
-  sha256 "9f909095d566966ba8563c68b7a4f4b1add6c9231a2abbf79d51d05e9d21e54a"
+  version "2.3.10"
+  sha256 "4128fb67552f7d8ef175d0822a915d4df799902dfcff531cfbfe2e9f610d7c62"
 
   url "https://github.com/LookInsideApp/LookInside/releases/download/#{version}/LookInside-#{version}-macOS-app.zip"
   name "LookInside"
