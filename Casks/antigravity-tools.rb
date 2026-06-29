@@ -1,6 +1,6 @@
 cask "antigravity-tools" do
-  version "4.2.8"
-  sha256 "2cb95c2ca7be21a817ace70b42bf20a0732542197917eb10b39f06cffaab506f"
+  version "4.2.9"
+  sha256 "4beda4df6a1e990cd0fe2e781a7649d06d4f585c1c9c00d4e4a8c67af53d7464"
 
   url "https://github.com/lbjlaq/Antigravity-Manager/releases/download/v#{version}/Antigravity.Tools_#{version}_universal.dmg"
   name "Antigravity Tools"
