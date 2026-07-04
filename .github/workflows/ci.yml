@@ -113,3 +113,17 @@ jobs:
               brew test "${formula}"
             done
           fi
+
+  automerge:
+    if: github.event_name == 'pull_request' && github.actor == 'ZachTestBot'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      # PAT, not GITHUB_TOKEN: the default token can't reliably merge PRs.
+      - run: gh pr merge "$PR" --squash --delete-branch
+        env:
+          GH_TOKEN: ${{ secrets.HOMEBREW_STAR_REPO_WORKFLOW_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
