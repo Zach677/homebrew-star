@@ -1,6 +1,6 @@
 cask "whatcopied" do
-  version "1.4.0"
-  sha256 "b831ba54d59bf15fbe698c1a92e226f479677ef3a16894b508761c5358f4465f"
+  version "1.4.1"
+  sha256 "9dfd8b94ca18052a40b234580ec3e397c69be157d67eb09ab0f7df06bb4ddfca"
 
   url "https://github.com/WhatCopied-app/WhatCopied/releases/download/v#{version}/WhatCopied-#{version}.dmg"
   name "WhatCopied"
