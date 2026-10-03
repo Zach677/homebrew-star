@@ -2,8 +2,7 @@ cask "codexbar" do
   version "0.18.0-beta.3"
   sha256 "3806e9b8c1c6c12b8c7d2e60b6bcaff3e677bc39ec40dade8fc4ee9de96568fd"
 
-  url "https://github.com/steipete/CodexBar/releases/download/v#{version}/CodexBar-#{version}.zip",
-      verified: "github.com/steipete/CodexBar/"
+  url "https://github.com/steipete/CodexBar/releases/download/v#{version}/CodexBar-#{version}.zip"
   name "CodexBar"
   desc "Menu bar usage monitor for Codex and Claude"
   homepage "https://codexbar.app/"

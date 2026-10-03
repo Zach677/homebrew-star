@@ -16,9 +16,8 @@ cask "lookinside" do
 
   app "LookInside.app"
 
-  preflight do
-    system_command "xattr",
-                   args: ["-cr", "#{staged_path}/LookInside.app"]
+  preflight_steps do
+    run "/usr/bin/xattr", args: ["-cr", "{{staged_path}}/LookInside.app"]
   end
 
   zap trash: [

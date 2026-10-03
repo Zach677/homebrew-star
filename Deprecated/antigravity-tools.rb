@@ -16,9 +16,8 @@ cask "antigravity-tools" do
 
   app "Antigravity Tools.app"
 
-  preflight do
-    system_command "xattr",
-                   args: ["-cr", "#{staged_path}/Antigravity Tools.app"]
+  preflight_steps do
+    run "/usr/bin/xattr", args: ["-cr", "{{staged_path}}/Antigravity Tools.app"]
   end
 
   zap trash: [

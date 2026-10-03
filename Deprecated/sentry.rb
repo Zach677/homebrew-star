@@ -16,9 +16,8 @@ cask "sentry" do
 
   app "Sentry.app"
 
-  preflight do
-    system_command "xattr",
-                   args: ["-cr", "#{staged_path}/Sentry.app"]
+  preflight_steps do
+    run "/usr/bin/xattr", args: ["-cr", "{{staged_path}}/Sentry.app"]
   end
 
   zap trash: [

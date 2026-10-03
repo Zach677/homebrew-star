@@ -16,9 +16,8 @@ cask "notchdrop" do
 
   app "NotchDrop.app"
 
-  preflight do
-    system_command "xattr",
-                   args: ["-cr", "#{staged_path}/NotchDrop.app"]
+  preflight_steps do
+    run "/usr/bin/xattr", args: ["-cr", "{{staged_path}}/NotchDrop.app"]
   end
 
   zap trash: [

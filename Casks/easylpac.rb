@@ -19,9 +19,8 @@ cask "easylpac" do
 
   app "EasyLPAC.app"
 
-  preflight do
-    system_command "xattr",
-                   args: ["-cr", "#{staged_path}/EasyLPAC.app"]
+  preflight_steps do
+    run "/usr/bin/xattr", args: ["-cr", "{{staged_path}}/EasyLPAC.app"]
   end
 
   # No zap stanza required

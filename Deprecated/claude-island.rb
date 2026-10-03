@@ -16,9 +16,8 @@ cask "claude-island" do
 
   app "Claude Island.app"
 
-  preflight do
-    system_command "xattr",
-                   args: ["-cr", "#{staged_path}/Claude Island.app"]
+  preflight_steps do
+    run "/usr/bin/xattr", args: ["-cr", "{{staged_path}}/Claude Island.app"]
   end
 
   zap trash: [

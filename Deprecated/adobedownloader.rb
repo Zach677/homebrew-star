@@ -12,13 +12,12 @@ cask "adobedownloader" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :monterey"
+  depends_on macos: :monterey
 
   app "Adobe Downloader.app"
 
-  preflight do
-    system_command "xattr",
-                   args: ["-cr", "#{staged_path}/Adobe Downloader.app"]
+  preflight_steps do
+    run "/usr/bin/xattr", args: ["-cr", "{{staged_path}}/Adobe Downloader.app"]
   end
 
   # No zap stanza required

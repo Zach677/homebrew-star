@@ -22,7 +22,7 @@ brew install --cask <cask-name>
 
 Example:
 ```shell
-brew install --cask alma
+brew install --cask Zach677/star/mitori
 ```
 
 ### Install Formula
@@ -42,6 +42,23 @@ brew uninstall --cask <cask-name>
 ```shell
 brew uninstall <formula-name>
 ```
+
+## Maintain Casks
+
+Follow the [Cask Cookbook](https://docs.brew.sh/Cask-Cookbook). Put active casks
+in `Casks/`. `Deprecated/` keeps archived casks and is not installable.
+
+Run these checks before you push:
+
+```shell
+brew style Casks Formula test/casks.rb
+brew style --only-cops Cask Deprecated
+brew ruby test/casks.rb
+```
+
+`test/casks.rb` runs a strict audit on ARM and Intel and fails on deprecation
+warnings. It also runs each `xattr` cleanup step on a temporary app bundle.
+When you add or remove a cleanup step, update `cleanup_tokens` in the test.
 
 ## 🥰 Acknowledgements
 

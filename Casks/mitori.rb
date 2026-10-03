@@ -11,9 +11,8 @@ cask "mitori" do
 
   app "Mitori.app"
 
-  preflight do
-    system_command "xattr",
-                   args: ["-cr", "#{staged_path}/Mitori.app"]
+  preflight_steps do
+    run "/usr/bin/xattr", args: ["-cr", "{{staged_path}}/Mitori.app"]
   end
 
   zap trash: "~/Library/Application Support/Mitori"

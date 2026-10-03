@@ -20,9 +20,8 @@ cask "alma" do
 
   app "Alma.app"
 
-  preflight do
-    system_command "xattr",
-                   args: ["-cr", "#{staged_path}/Alma.app"]
+  preflight_steps do
+    run "/usr/bin/xattr", args: ["-cr", "{{staged_path}}/Alma.app"]
   end
 
   zap trash: [

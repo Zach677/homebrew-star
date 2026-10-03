@@ -2,8 +2,7 @@ cask "pcl-refactor" do
   version "1.0.3"
   sha256 "dd86c3f173ac969562946122b66636582496aa7688d4ea3a9275de33e91d071e"
 
-  url "https://github.com/CylorineStudio/PCL.Mac.Refactor/releases/download/v#{version}/PCL.Mac-v#{version}.dmg",
-      verified: "github.com/CylorineStudio/PCL.Mac.Refactor/"
+  url "https://github.com/CylorineStudio/PCL.Mac.Refactor/releases/download/v#{version}/PCL.Mac-v#{version}.dmg"
   name "PCL.Mac"
   name "PCL.Mac.Refactor"
   desc "Unofficial SwiftUI rewrite of Plain Craft Launcher"
@@ -18,9 +17,8 @@ cask "pcl-refactor" do
 
   app "PCL.Mac.app"
 
-  preflight do
-    system_command "xattr",
-                   args: ["-cr", "#{staged_path}/PCL.Mac.app"]
+  preflight_steps do
+    run "/usr/bin/xattr", args: ["-cr", "{{staged_path}}/PCL.Mac.app"]
   end
 
   zap trash: [

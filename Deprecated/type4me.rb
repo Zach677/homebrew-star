@@ -16,9 +16,8 @@ cask "type4me" do
 
   app "Type4Me.app"
 
-  preflight do
-    system_command "xattr",
-                   args: ["-cr", "#{staged_path}/Type4Me.app"]
+  preflight_steps do
+    run "/usr/bin/xattr", args: ["-cr", "{{staged_path}}/Type4Me.app"]
   end
 
   zap trash: [

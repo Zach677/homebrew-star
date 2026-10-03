@@ -2,8 +2,7 @@ cask "cradle" do
   version "20260621.4"
   sha256 "64cc0fe79efbc98113791fd9bcfbe13c8dc97034a192e47b805131d7ac5f8cad"
 
-  url "https://github.com/wibus-wee/cradle-app/releases/download/dev-#{version}/Cradle.dmg",
-      verified: "github.com/wibus-wee/cradle-app/"
+  url "https://github.com/wibus-wee/cradle-app/releases/download/dev-#{version}/Cradle.dmg"
   name "Cradle"
   desc "Command center for coordinating AI coding agents"
   homepage "https://cradle.wibus.ren/"
@@ -18,9 +17,8 @@ cask "cradle" do
 
   app "Cradle.app"
 
-  preflight do
-    system_command "xattr",
-                   args: ["-cr", "#{staged_path}/Cradle.app"]
+  preflight_steps do
+    run "/usr/bin/xattr", args: ["-cr", "{{staged_path}}/Cradle.app"]
   end
 
   zap trash: [
