@@ -1,0 +1,35 @@
+name: Auto-merge bump PRs
+
+# Bump PRs come from the ZachTestBot fork, and fork PR workflows get no secrets.
+# workflow_run runs in this repository after Tap CI, so it can read the token.
+# It does not check out PR code.
+on:
+  workflow_run:
+    workflows:
+      - Tap CI
+    types:
+      - completed
+
+permissions: {}
+
+jobs:
+  automerge:
+    if: >-
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.actor.login == 'ZachTestBot'
+    runs-on: ubuntu-latest
+    steps:
+      # PAT, not GITHUB_TOKEN: the default token can't reliably merge PRs.
+      - run: |
+          pr="$(gh pr list --repo "$REPO" --state open --author ZachTestBot \
+            --json number,headRefOid --jq ".[] | select(.headRefOid == \"$SHA\") | .number")"
+          if [[ -z "$pr" ]]; then
+            echo "No open bump PR for $SHA"
+            exit 0
+          fi
+          gh pr merge "$pr" --repo "$REPO" --squash --delete-branch --match-head-commit "$SHA"
+        env:
+          GH_TOKEN: ${{ secrets.HOMEBREW_STAR_REPO_WORKFLOW_TOKEN }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
