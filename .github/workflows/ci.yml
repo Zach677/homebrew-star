@@ -81,12 +81,12 @@ jobs:
 
           if [[ "${event_name}" == "pull_request" ]]; then
             git -C "${tap_repo}" fetch --no-tags --depth=100 origin "${GITHUB_BASE_REF}"
-            changed_files="$(git -C "${tap_repo}" diff --name-only "origin/${GITHUB_BASE_REF}" HEAD -- Casks Formula)"
+            changed_files="$(git -C "${tap_repo}" diff --name-only --diff-filter=d "origin/${GITHUB_BASE_REF}" HEAD -- Casks Formula)"
           elif [[ "${event_name}" == "push" && -n "${BEFORE_SHA}" && ! "${BEFORE_SHA}" =~ ^0+$ ]]; then
             git -C "${tap_repo}" fetch --no-tags --depth=100 origin "${BEFORE_SHA}" || true
-            changed_files="$(git -C "${tap_repo}" diff --name-only "${BEFORE_SHA}" HEAD -- Casks Formula || true)"
+            changed_files="$(git -C "${tap_repo}" diff --name-only --diff-filter=d "${BEFORE_SHA}" HEAD -- Casks Formula || true)"
           elif git -C "${tap_repo}" rev-parse --verify HEAD^ >/dev/null 2>&1; then
-            changed_files="$(git -C "${tap_repo}" diff --name-only HEAD^ HEAD -- Casks Formula || true)"
+            changed_files="$(git -C "${tap_repo}" diff --name-only --diff-filter=d HEAD^ HEAD -- Casks Formula || true)"
           fi
 
           changed_casks="$(printf "%s\n" "${changed_files}" | sed -nE "s#^Casks/([^/]+)\.rb#${TAP}/\1#p" | sort -u | xargs)"
