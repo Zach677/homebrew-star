@@ -20,5 +20,5 @@ cask "adobedownloader" do
     run "/usr/bin/xattr", args: ["-cr", "{{staged_path}}/Adobe Downloader.app"]
   end
 
-  # No zap stanza required
+  zap :not_required
 end

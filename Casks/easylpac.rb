@@ -23,5 +23,5 @@ cask "easylpac" do
     run "/usr/bin/xattr", args: ["-cr", "{{staged_path}}/EasyLPAC.app"]
   end
 
-  # No zap stanza required
+  zap :not_required
 end
