@@ -39,7 +39,9 @@ jobs:
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@main
         with:
-          core: false
+          # The strict cask audit reads homebrew/core formula names. Without the
+          # tap it calls the API, which has no endpoint for the simulated OS tag.
+          core: shallow
           cask: true
 
       - name: Validate tap packages
