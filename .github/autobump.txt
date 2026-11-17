@@ -1,5 +1,4 @@
 notchdrop
-easylpac
 minilpa
 lookinside
 mitori
