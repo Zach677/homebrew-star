@@ -1,6 +1,6 @@
 cask "mitori" do
-  version "0.3.1"
-  sha256 "9ffe5479a632b6967a83d0c3b10e25f06df7cf08d5dad95fc1a74483ba126a99"
+  version "0.3.2"
+  sha256 "19c44b1265de804ea6ce9dff47f9aa873b28f344ff852afbf725450e899298a1"
 
   url "https://github.com/Zach677/mitori/releases/download/v#{version}/Mitori-#{version}.dmg"
   name "Mitori"
