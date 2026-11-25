@@ -10,7 +10,7 @@ Homebrew.raise_deprecation_exceptions = true
 paths = Pathname(__dir__).parent.glob("{Casks,Deprecated}/*.rb")
 cleanup_tokens = %w[
   adobedownloader alma antigravity-tools claude-island cradle easylpac lookinside
-  notchdrop ocs-desktop pastemd pcl-refactor sentry type4me
+  notchdrop ocs-desktop pastemd pcl-refactor see sentry type4me
 ]
 
 [:arm, :intel].each do |arch|
