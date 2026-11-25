@@ -12,6 +12,7 @@ Personal [Homebrew](https://brew.sh) tap for macOS casks and formulae not in the
 | [Mitori](https://github.com/Zach677/mitori) | Cask | Monitor Apple ID store credit balances from the menu bar | `brew install --cask Zach677/star/mitori` |
 | [NotchDrop](https://github.com/Lakr233/NotchDrop) | Cask | Transform your MacBook's notch into a convenient file drop zone | `brew install --cask Zach677/star/notchdrop` |
 | [OCS Desktop](https://docs.ocsjs.com/docs/app) | Cask | Desktop app for OCS browser automation workflows | `brew install --cask Zach677/star/ocs-desktop` |
+| [See](https://github.com/wibus-wee/see) | Cask | Desktop app for reading source code | `brew install --cask Zach677/star/see` |
 
 ## Usage
 
